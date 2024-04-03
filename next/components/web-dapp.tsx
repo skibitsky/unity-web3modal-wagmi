@@ -1,5 +1,3 @@
-'use client'
-
 import ConnectButton from "@/components/connect-button";
 import SignButton from "@/components/sign-button";
 
