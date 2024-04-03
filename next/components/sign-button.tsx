@@ -21,7 +21,7 @@ export default function SignButton() {
   return (
     <button onClick={onSignMessage}
             disabled={!isConnected}
-            className="rounded-full bg-[#47A1FF] hover:bg-[#59AAFF] disabled:bg-gray-500 disabled:text-gray-400 px-[16px] py-[9px] text-white text-sm font-medium">
+            className="flex-grow-0 rounded-full bg-[#47A1FF] hover:bg-[#59AAFF] disabled:bg-gray-500 disabled:text-gray-400 px-[16px] py-[9px] text-white text-sm font-medium">
       Sign Message
     </button>
   )
