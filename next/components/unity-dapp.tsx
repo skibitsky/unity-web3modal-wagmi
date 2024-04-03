@@ -7,7 +7,14 @@ import {useAccount, useSignMessage} from "wagmi";
 import {toast} from "sonner";
 
 export default function UnityDapp() {
-  const {unityProvider, addEventListener, removeEventListener, sendMessage, isLoaded} = useUnityContext({
+  const {
+    unityProvider,
+    addEventListener,
+    removeEventListener,
+    sendMessage,
+    isLoaded,
+    requestFullscreen
+  } = useUnityContext({
     loaderUrl: "unity/Build/unity.loader.js",
     dataUrl: "unity/Build/unity.data",
     frameworkUrl: "unity/Build/unity.framework.js",
@@ -51,7 +58,6 @@ export default function UnityDapp() {
       return;
 
     const isConnectedStr = isConnected ? 'true' : 'false'
-    console.log('UnityDapp isConnected', isConnectedStr)
     sendMessage('Scripts', 'SetConnectedState', isConnectedStr)
   }, [isConnected, isLoaded]);
 
@@ -84,6 +90,13 @@ export default function UnityDapp() {
 
 
   return (
-    <Unity unityProvider={unityProvider} style={{width: 300, height: 400}} devicePixelRatio={devicePixelRatio}/>
+    <div className="flex flex-col justify-items-center">
+      <Unity unityProvider={unityProvider} style={{width: 300, height: 400}} devicePixelRatio={devicePixelRatio}/>
+      <button className="text-gray-400 hover:underline hover:text-gray-300 text-sm"
+              onClick={() => requestFullscreen(true)}>
+        enter fullscreen
+      </button>
+
+    </div>
   )
 }
