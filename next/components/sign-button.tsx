@@ -5,8 +5,7 @@ import {toast} from "sonner";
 
 export default function SignButton() {
   const {signMessageAsync} = useSignMessage()
-  const {status} = useAccount()
-  const isConnected = status === 'connected'
+  const {isConnected} = useAccount()
 
   async function onSignMessage() {
     try {
