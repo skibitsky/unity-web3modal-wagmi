@@ -10,14 +10,15 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.28.12",
+    "@web3modal/siwe": "^4.1.5",
     "@web3modal/wagmi": "^4.1.5",
     "next": "14.1.4",
     "react": "^18",
     "react-dom": "^18",
     "react-unity-webgl": "^9.5.1",
     "sonner": "^1.4.41",
-    "viem": "^2.9.6",
-    "wagmi": "^2.5.17"
+    "viem": "^2.9.8",
+    "wagmi": "^2.5.18"
   },
   "devDependencies": {
     "@types/node": "^20",
