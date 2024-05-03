@@ -1,10 +1,10 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
-import { Unity, useUnityContext } from 'react-unity-webgl'
-import { useWeb3Modal } from '@web3modal/wagmi/react'
-import { useAccount, useSignMessage } from 'wagmi'
-import { toast } from 'sonner'
+import React, {useEffect, useState} from 'react'
+import {Unity, useUnityContext} from 'react-unity-webgl'
+import {useWeb3Modal, useWeb3ModalState} from '@web3modal/wagmi/react'
+import {useAccount, useSignMessage} from 'wagmi'
+import {toast} from 'sonner'
 
 export default function UnityDapp() {
   const {
@@ -21,12 +21,18 @@ export default function UnityDapp() {
     codeUrl: 'unity/Build/unity.wasm'
   })
 
-  const { open } = useWeb3Modal()
-  const { status } = useAccount()
+  const {open} = useWeb3Modal()
+  const {open: openState} = useWeb3ModalState()
+
+  const {status} = useAccount()
   const isConnected = status === 'connected'
-  const { signMessageAsync } = useSignMessage()
+  const {signMessageAsync} = useSignMessage()
 
   const [devicePixelRatio, setDevicePixelRatio] = useState(0)
+
+  useEffect(() => {
+    sendMessage('Scripts', 'SetModalOpenState', String(openState))
+  }, [openState]);
 
   useEffect(
     function () {
@@ -82,7 +88,7 @@ export default function UnityDapp() {
     const async = async () => {
       try {
         toast.message('Signing message...')
-        const signature = await signMessageAsync({ message: 'Hello Web3Modal!' })
+        const signature = await signMessageAsync({message: 'Hello Web3Modal!'})
         toast.success('Message signed')
       } catch {
         toast.error('Failed to sign message')
@@ -105,7 +111,7 @@ export default function UnityDapp() {
     <div className="flex flex-col justify-items-center">
       <Unity
         unityProvider={unityProvider}
-        style={{ width: 300, height: 400 }}
+        style={{width: 300, height: 400}}
         devicePixelRatio={devicePixelRatio}
       />
       <button
