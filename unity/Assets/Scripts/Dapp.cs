@@ -55,5 +55,15 @@ namespace Skibitsky.Unity.Web3ModalWagmi
                 _signButton.SetEnabled(valueBool);
             }
         }
+
+        [Preserve]
+        public void SetModalOpenState(string value)
+        {
+            Debug.Log($"SetModalOpenState: {value}");
+#if !UNITY_EDITOR && UNITY_WEBGL
+        // disable WebGLInput.captureAllKeyboardInput so elements in web page can handle keyboard inputs
+        WebGLInput.captureAllKeyboardInput = !bool.Parse(value);
+#endif
+        }
     }
 }
